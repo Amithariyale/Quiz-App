@@ -178,7 +178,9 @@ function showScore() {
 document.querySelector(".card>button").addEventListener("click", () => {
   document.querySelector(".card").style.display = "none";
   questionSection.style.display = "none";
+  location.reload();
 });
+
 function showTheQuestion(arr, queCtn) {
   if (queCtn === arr.length) showScore(); //It will show the total score
   if (queCtn < 0) queCtn = arr.length - 1;
