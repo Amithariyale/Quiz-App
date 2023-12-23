@@ -1,5 +1,3 @@
-"use strict";
-
 const catContainer = document.querySelector("#category_container");
 const startBtn = document.querySelector("#hero button");
 const tagSpan = document.querySelectorAll(".tag>span");
@@ -133,7 +131,6 @@ function tagSelect(close, button) {
       (item) => item !== button.innerText
     );
   }
-  //   console.log(selectedCategories);
 }
 tagBtn.forEach((item) => {
   item.addEventListener("click", (e) => {
@@ -164,13 +161,24 @@ function clearSelection() {
   });
 }
 
+// Function for showing the final score.
 function showScore() {
   document.querySelector(".navigation").remove();
   const h2 = document.createElement("h2");
   h2.innerText = `SCORE : ${score}`;
   h2.classList.add("score");
   questionSection.append(h2);
+
+  document.querySelector(".card").style.display = "block";
+  const innerH2 = document.querySelector(".card>h2");
+  innerH2.innerText = `Your Score is : ${score}`;
 }
+
+// card button for closing quiz score.
+document.querySelector(".card>button").addEventListener("click", () => {
+  document.querySelector(".card").style.display = "none";
+  questionSection.style.display = "none";
+});
 function showTheQuestion(arr, queCtn) {
   if (queCtn === arr.length) showScore(); //It will show the total score
   if (queCtn < 0) queCtn = arr.length - 1;
@@ -190,11 +198,8 @@ function showTheQuestion(arr, queCtn) {
 
   //   Next button event
   nextBtn.addEventListener("click", (e) => {
-    console.log(queCtn);
-    console.log(selectedOption === arr[queCtn].answer);
     if (selectedOption === arr[queCtn].answer) score++;
     selectedOption = undefined;
-    console.log(score);
     queCtn++;
     showTheQuestion(arr, queCtn);
     e.stopImmediatePropagation();
